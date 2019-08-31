@@ -2,7 +2,7 @@
 
 #  Magento 2 Docker to Development
 
-### Apache 2.4 + PHP 7.1 + OPCache + MariaDB + N98 Magerun 2 + XDebug + Redis
+### Apache 2.4 + PHP 7.2 + OPCache + MariaDB + N98 Magerun 2 + XDebug + Redis
 
 [![Build Status](https://travis-ci.org/deepakworldphp86/docker-magento2.svg?branch=master)](https://travis-ci.org/deepakworldphp86/docker-magento2)
 [![Docker Build](https://img.shields.io/docker/build/deepakworldphp86/magento2.svg)](https://hub.docker.com/r/deepakworldphp86/magento2/)
