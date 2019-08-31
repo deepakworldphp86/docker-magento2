@@ -34,7 +34,7 @@ RUN apt-get update \
 	apt-utils \
 	gnupg \
 	redis-tools \
-	default-mysql-client \
+	mariadb-client \
 	git \
 	vim \
 	wget \
