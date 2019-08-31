@@ -1,14 +1,14 @@
-![Magento 2](https://cdn.rawgit.com/rafaelstz/magento2-snippets-visualstudio/master/images/icon.png)
+![Magento 2](https://cdn.rawgit.com/deepakworldphp86/magento2-snippets-visualstudio/master/images/icon.png)
 
 #  Magento 2 Docker to Development
 
 ### Apache 2.4 + PHP 7.1 + OPCache + MariaDB + N98 Magerun 2 + XDebug + Redis
 
 [![Build Status](https://travis-ci.org/clean-docker/Magento2.svg?branch=master)](https://travis-ci.org/clean-docker/Magento2)
-[![Docker Build](https://img.shields.io/docker/build/rafaelcgstz/magento2.svg)](https://hub.docker.com/r/rafaelcgstz/magento2/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/rafaelcgstz/magento2.svg)](https://hub.docker.com/r/rafaelcgstz/magento2/)
-[![Docker Starts](https://img.shields.io/docker/stars/rafaelcgstz/magento2.svg)](https://hub.docker.com/r/rafaelcgstz/magento2/)
-[![Build Status](https://images.microbadger.com/badges/image/rafaelcgstz/magento2.svg)](https://microbadger.com/images/rafaelcgstz/magento2)
+[![Docker Build](https://img.shields.io/docker/build/deepakworldphp86/magento2.svg)](https://hub.docker.com/r/deepakworldphp86/magento2/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/deepakworldphp86/magento2.svg)](https://hub.docker.com/r/deepakworldphp86/magento2/)
+[![Docker Starts](https://img.shields.io/docker/stars/deepakworldphp86/magento2.svg)](https://hub.docker.com/r/deepakworldphp86/magento2/)
+[![Build Status](https://images.microbadger.com/badges/image/deepakworldphp86/magento2.svg)](https://microbadger.com/images/deepakworldphp86/magento2)
 [![Releases](https://img.shields.io/github/release/clean-docker/Magento2.svg)](https://github.com/clean-docker/Magento2/releases)
 
 ### Requirements

@@ -1,6 +1,6 @@
 FROM php:7.1-apache
 
-MAINTAINER Rafael Corrêa Gomes <rafaelcgstz@gmail.com>
+MAINTAINER Rafael Corrêa Gomes <deepakworldphp86@gmail.com>
 
 ENV XDEBUG_PORT 9000
 
