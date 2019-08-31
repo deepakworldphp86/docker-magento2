@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.2-apache
 
 MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
 
@@ -12,7 +12,9 @@ RUN apt-get update \
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
 	libfreetype6-dev \
+        zlib1g-dev\
 	libicu-dev \
+        g++ \ 
         libssl-dev \
 	libjpeg62-turbo-dev \
 	libmcrypt-dev \
