@@ -6,7 +6,7 @@ RUN apt-get update
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-
+FROM php:7.2-fpm
 #FROM php:7.2-apache
 
 MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
@@ -30,6 +30,7 @@ RUN apt-get update \
 	libedit-dev \
 	libedit2 \
 	libxslt1-dev \
+        libpng-dev \
 	apt-utils \
 	gnupg \
 	redis-tools \
@@ -50,53 +51,31 @@ RUN apt-get update \
         iputils-ping \
         locales \
 	cron \
-        ca-certificates \
-	bash-completion \
-	&& apt-get clean  && rm -rf /var/lib/apt/lists/*
+        sendmail-bin \ 
+       sendmail \ 
+       ca-certificates \
+       bash-completion \
+       && apt-get clean  && rm -rf /var/lib/apt/lists/*
 
 
-# Install Magento Dependencies
+# Configure the gd library
+RUN docker-php-ext-configure \
+  gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
-#RUN docker-php-ext-configure \
-  	#gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
-  	#docker-php-ext-install \
-  	#opcache \
-  	#gd \
-  	#bcmath \
-  	#intl \
-  	#mbstring \
-  	#mcrypt \
-  	#pdo_mysql \
-  	#soap \
-  	#xsl \
-  	#zip
-        
-        
-RUN apt-get update && apt-get install -yq --no-install-recommends \
-    # Install apache
-    apache2 \
-    # Install php 7.2
-    libapache2-mod-php7.2 \
-    php7.2-cli \
-    php7.2-xsl \
-    php7.2-opcache
-    php7.2-json \
-    php7.2-bcmath \
-    php7.2-curl \
-    php7.2-fpm \
-    php7.2-gd \
-    php7.2-ext \
-    php7.2-ldap \
-    php7.2-mbstring \
-    php7.2-mysql \
-    php7.2-soap \
-    php7.2-sqlite3 \
-    php7.2-xml \
-    php7.2-zip \
-    php7.2-intl \
-    php-imagick \
-    # Install tools        
+   
+# Install required PHP extensions
 
+RUN docker-php-ext-install \
+  dom \ 
+  gd \ 
+  intl \ 
+  mbstring \ 
+  pdo_mysql \ 
+  xsl \ 
+  zip \ 
+  soap \ 
+  bcmath
+     
 # Install oAuth
 
 RUN apt-get update \
@@ -149,6 +128,32 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
 	&& mv ./n98-magerun2.phar /usr/local/bin/
 
 # Configuring system
+# Additional start
+RUN pecl install -o -f xdebug
+
+ENV PHP_MEMORY_LIMIT 2G
+ENV PHP_ENABLE_XDEBUG false
+ENV MAGENTO_ROOT /var/www/magento
+ENV DEBUG false
+ENV UPDATE_UID_GID false
+ADD etc/php-xdebug.ini /usr/local/etc/php/conf.d/zz-xdebug-settings.ini
+ADD etc/mail.ini /usr/local/etc/php/conf.d/zz-mail.ini
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN ["chmod", "+x", "/docker-entrypoint.sh"]
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+
+ENV MAGENTO_RUN_MODE developer
+ENV UPLOAD_MAX_FILESIZE 64M
+
+ADD etc/php-fpm.ini /usr/local/etc/php/conf.d/zz-magento.ini
+
+ADD etc/php-fpm.conf /usr/local/etc/
+
+CMD ["php-fpm", "-F"]
+
+# Additional End
 
 ADD .docker/config/php.ini /usr/local/etc/php/php.ini
 ADD .docker/config/magento.conf /etc/apache2/sites-available/magento.conf
