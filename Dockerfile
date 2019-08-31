@@ -1,4 +1,13 @@
-FROM php:7.1-apache
+#Download base image ubuntu 16.04
+FROM ubuntu:18.04
+
+# Update Software repository
+RUN apt-get update
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+
+#FROM php:7.2-apache
 
 MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
 
@@ -7,7 +16,7 @@ ENV XDEBUG_PORT 9000
 # Install System Dependencies
 
 RUN apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+	&& apt-get install -y --no-install-recommends \
 	software-properties-common \
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -28,30 +37,65 @@ RUN apt-get update \
 	git \
 	vim \
 	wget \
+        openssl \
+        nano \
 	curl \
 	lynx \
 	psmisc \
 	unzip \
 	tar \
+        graphicsmagick \
+        imagemagick \
+        ghostscript \
+        iputils-ping \
+        locales \
 	cron \
+        ca-certificates \
 	bash-completion \
-	&& apt-get clean
+	&& apt-get clean  && rm -rf /var/lib/apt/lists/*
+
 
 # Install Magento Dependencies
 
-RUN docker-php-ext-configure \
-  	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
-  	docker-php-ext-install \
-  	opcache \
-  	gd \
-  	bcmath \
-  	intl \
-  	mbstring \
-  	mcrypt \
-  	pdo_mysql \
-  	soap \
-  	xsl \
-  	zip
+#RUN docker-php-ext-configure \
+  	#gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
+  	#docker-php-ext-install \
+  	#opcache \
+  	#gd \
+  	#bcmath \
+  	#intl \
+  	#mbstring \
+  	#mcrypt \
+  	#pdo_mysql \
+  	#soap \
+  	#xsl \
+  	#zip
+        
+        
+RUN apt-get update && apt-get install -yq --no-install-recommends \
+    # Install apache
+    apache2 \
+    # Install php 7.2
+    libapache2-mod-php7.2 \
+    php7.2-cli \
+    php7.2-xsl \
+    php7.2-opcache
+    php7.2-json \
+    php7.2-bcmath \
+    php7.2-curl \
+    php7.2-fpm \
+    php7.2-gd \
+    php7.2-ext \
+    php7.2-ldap \
+    php7.2-mbstring \
+    php7.2-mysql \
+    php7.2-soap \
+    php7.2-sqlite3 \
+    php7.2-xml \
+    php7.2-zip \
+    php7.2-intl \
+    php-imagick \
+    # Install tools        
 
 # Install oAuth
 
@@ -74,6 +118,9 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
 
 RUN	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 RUN composer global require hirak/prestissimo
+
+# Set locales
+RUN locale-gen en_US.UTF-8 en_GB.UTF-8 de_DE.UTF-8 es_ES.UTF-8 fr_FR.UTF-8 it_IT.UTF-8 km_KH sv_SE.UTF-8 fi_FI.UTF-8
 
 # Install Code Sniffer
 
