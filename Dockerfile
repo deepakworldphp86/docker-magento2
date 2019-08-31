@@ -1,6 +1,6 @@
 FROM php:7.1-apache
 
-MAINTAINER Rafael Corrêa Gomes <deepakworldphp86@gmail.com>
+MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
 
 ENV XDEBUG_PORT 9000
 
@@ -13,7 +13,7 @@ RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
 	libfreetype6-dev \
 	libicu-dev \
-  libssl-dev \
+        libssl-dev \
 	libjpeg62-turbo-dev \
 	libmcrypt-dev \
 	libedit-dev \
@@ -22,7 +22,7 @@ RUN apt-get update \
 	apt-utils \
 	gnupg \
 	redis-tools \
-	mysql-client \
+	mariadb-client \
 	git \
 	vim \
 	wget \
