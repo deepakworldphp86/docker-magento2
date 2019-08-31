@@ -1,3 +1,4 @@
+FROM ubuntu:18.04
 FROM php:7.2-apache
 
 MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
@@ -24,7 +25,7 @@ RUN apt-get update \
 	apt-utils \
 	gnupg \
 	redis-tools \
-	mariadb-client \
+	default-mysql-client \
 	git \
 	vim \
 	wget \
