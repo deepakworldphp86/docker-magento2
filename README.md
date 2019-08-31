@@ -4,12 +4,12 @@
 
 ### Apache 2.4 + PHP 7.1 + OPCache + MariaDB + N98 Magerun 2 + XDebug + Redis
 
-[![Build Status](https://travis-ci.org/clean-docker/Magento2.svg?branch=master)](https://travis-ci.org/clean-docker/Magento2)
+[![Build Status](https://travis-ci.org/deepakworldphp86/docker-magento2.svg?branch=master)](https://travis-ci.org/deepakworldphp86/docker-magento2)
 [![Docker Build](https://img.shields.io/docker/build/deepakworldphp86/magento2.svg)](https://hub.docker.com/r/deepakworldphp86/magento2/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/deepakworldphp86/magento2.svg)](https://hub.docker.com/r/deepakworldphp86/magento2/)
 [![Docker Starts](https://img.shields.io/docker/stars/deepakworldphp86/magento2.svg)](https://hub.docker.com/r/deepakworldphp86/magento2/)
 [![Build Status](https://images.microbadger.com/badges/image/deepakworldphp86/magento2.svg)](https://microbadger.com/images/deepakworldphp86/magento2)
-[![Releases](https://img.shields.io/github/release/clean-docker/Magento2.svg)](https://github.com/clean-docker/Magento2/releases)
+[![Releases](https://img.shields.io/github/release/cdeepakworldphp86/docker-magento2.svg)](https://github.com/deepakworldphp86/docker-magento2/releases)
 
 ### Requirements
 
@@ -30,7 +30,7 @@ Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubu
 Execute in your terminal, change the *MYMAGENTO2* to use the name of your project:
 
 ```
-curl -s https://raw.githubusercontent.com/clean-docker/Magento2/master/init | bash -s MYMAGENTO2 clone
+curl -s https://raw.githubusercontent.com/deepakworldphp86/docker-magento2/master/init | bash -s MYMAGENTO2 clone
 ```
 
 If you want to install the Magento 2, use like that:
@@ -84,4 +84,4 @@ or to run in the background using detached mode
 
 ### License
 
-MIT © 2018 [Rafael Corrêa Gomes](https://github.com/rafaelstz/) and [contributors](https://github.com/clean-docker/Magento2/graphs/contributors).
+MIT © 2019 [Deepak Kumar ](https://github.com/deepakworldphp86/) and [contributors](https://github.com/deepakworldphp86/docker-magento2/graphs/contributors).
