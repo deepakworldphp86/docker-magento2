@@ -6,8 +6,9 @@ RUN apt-get update
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-FROM php:7.2-fpm
-#FROM php:7.2-apache
+#FROM php:7.2-fpm
+FROM php:7.2-apache
+#FROM php:7.2-cli
 
 MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
 
