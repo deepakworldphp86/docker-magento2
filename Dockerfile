@@ -4,7 +4,7 @@ FROM ubuntu:18.04
 # Update Software repository
 RUN apt-get update
 
-ENV DEBIAN_FRONTEND=interactive
+ENV DEBIAN_FRONTEND=noninteractive
 
 FROM php:7.2-fpm
 
@@ -18,7 +18,7 @@ RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 	software-properties-common \
 	&& apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	&& apt-get install -y \
         apache2 \
 	libfreetype6-dev \
         zlib1g-dev\
