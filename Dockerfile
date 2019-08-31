@@ -1,10 +1,10 @@
-#Download base image ubuntu 16.04
+#Download base image ubuntu 18.04
 FROM ubuntu:18.04
 
 # Update Software repository
 RUN apt-get update
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=interactive
 
 FROM php:7.2-fpm
 
@@ -58,23 +58,21 @@ RUN apt-get update \
        && apt-get clean  && rm -rf /var/lib/apt/lists/*
 
 
-# Configure the gd library
+# Install Magento Dependencies
+
 RUN docker-php-ext-configure \
-  gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-
-   
-# Install required PHP extensions
-
-RUN docker-php-ext-install \
-  dom \ 
-  gd \ 
-  intl \ 
-  mbstring \ 
-  pdo_mysql \ 
-  xsl \ 
-  zip \ 
-  soap \ 
-  bcmath
+  	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
+  	docker-php-ext-install \
+  	opcache \
+  	gd \
+  	bcmath \
+  	intl \
+  	mbstring \
+  	mcrypt \
+  	pdo_mysql \
+  	soap \
+  	xsl \
+  	zip
      
 # Install oAuth
 
