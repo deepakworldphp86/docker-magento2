@@ -6,9 +6,7 @@ RUN apt-get update
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-#FROM php:7.2-fpm
-FROM php:7.2-apache
-#FROM php:7.2-cli
+FROM php:7.2-fpm
 
 MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
 
@@ -21,6 +19,7 @@ RUN apt-get update \
 	software-properties-common \
 	&& apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+        apache2 \
 	libfreetype6-dev \
         zlib1g-dev\
 	libicu-dev \
