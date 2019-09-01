@@ -42,7 +42,7 @@ RUN apt-get update \
 	libicu-dev \
         g++ \ 
         libssl-dev \
-	libjpeg62-turbo-dev \
+	libjpeg-turbo8-dev \
 	libmcrypt-dev \
 	libedit-dev \
 	libedit2 \
