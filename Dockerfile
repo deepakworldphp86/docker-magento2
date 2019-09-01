@@ -36,6 +36,7 @@ RUN apt-get update \
         php7.2-zip \
         php7.2-intl \
         php-imagick \
+        php-oauth \
         # Install tools
 	libfreetype6-dev \
         zlib1g-dev\
@@ -78,12 +79,12 @@ RUN apt-get update \
 
 # Install oAuth
 
-#RUN apt-get update \
-  	#&& apt-get install -y \
-  	#libpcre3 \
-  	#libpcre3-dev \
-  	# php-pear \
-  	#&& pecl install oauth \
+RUN apt-get update \
+  	&& apt-get install -y \
+  	libpcre3 \
+  	libpcre3-dev \
+  	php-pear \
+  	&& pecl install oauth
   	#&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
 
 # Install Node, NVM, NPM and Grunt
