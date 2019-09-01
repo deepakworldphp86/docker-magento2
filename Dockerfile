@@ -75,18 +75,16 @@ RUN apt-get update \
        bash-completion \
        && apt-get clean  && rm -rf /var/lib/apt/lists/*
 
-# Install php-pear
-RUN pacman -S php-pear
 
 # Install oAuth
 
-RUN apt-get update \
-  	&& apt-get install -y \
-  	libpcre3 \
-  	libpcre3-dev \
+#RUN apt-get update \
+  	#&& apt-get install -y \
+  	#libpcre3 \
+  	#libpcre3-dev \
   	# php-pear \
-  	&& pecl install oauth \
-  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
+  	#&& pecl install oauth \
+  	#&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
 
 # Install Node, NVM, NPM and Grunt
 
@@ -113,8 +111,8 @@ ENV PATH="/var/www/.composer/vendor/bin/:${PATH}"
 
 # Install XDebug
 
-RUN yes | pecl install xdebug && \
-	 echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.iniOLD
+#RUN yes | pecl install xdebug && \
+	 #echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.iniOLD
 
 # Install Mhsendmail
 
@@ -132,9 +130,6 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
 # Configuring system
 # Additional start
 ENV PHP_MEMORY_LIMIT 2G
-ENV PHP_ENABLE_XDEBUG false
-ENV DEBUG false
-ENV UPDATE_UID_GID false
 # Additional End
 
 ADD .docker/config/php.ini /usr/local/etc/php/php.ini
