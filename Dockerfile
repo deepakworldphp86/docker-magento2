@@ -6,7 +6,6 @@ RUN apt-get update
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-FROM php:7.2-fpm-stretch
 
 MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
 
@@ -19,7 +18,25 @@ RUN apt-get update \
 	software-properties-common \
 	&& apt-get update \
 	&& apt-get install -y \
+        # Install apache
         apache2 \
+        # Install php 7.2
+        libapache2-mod-php7.2 \
+        php7.2-cli \
+        php7.2-json \
+        php7.2-curl \
+        php7.2-fpm \
+        php7.2-gd \
+        php7.2-ldap \
+        php7.2-mbstring \
+        php7.2-mysql \
+        php7.2-soap \
+        php7.2-sqlite3 \
+        php7.2-xml \
+        php7.2-zip \
+        php7.2-intl \
+        php-imagick \
+        # Install tools
 	libfreetype6-dev \
         zlib1g-dev\
 	libicu-dev \
@@ -58,22 +75,6 @@ RUN apt-get update \
        && apt-get clean  && rm -rf /var/lib/apt/lists/*
 
 
-# Install Magento Dependencies
-
-RUN docker-php-ext-configure \
-  	gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/; \
-  	docker-php-ext-install \
-  	opcache \
-  	gd \
-  	bcmath \
-  	intl \
-  	mbstring \
-  	mcrypt \
-  	pdo_mysql \
-  	soap \
-  	xsl \
-  	zip
-     
 # Install oAuth
 
 RUN apt-get update \
