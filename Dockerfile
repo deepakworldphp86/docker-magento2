@@ -41,6 +41,7 @@ RUN apt-get update \
         zlib1g-dev\
 	libicu-dev \
         g++ \ 
+        pacman \
         libssl-dev \
 	libjpeg-turbo8-dev \
 	libmcrypt-dev \
@@ -74,6 +75,8 @@ RUN apt-get update \
        bash-completion \
        && apt-get clean  && rm -rf /var/lib/apt/lists/*
 
+# Install php-pear
+RUN pacman -S php-pear
 
 # Install oAuth
 
