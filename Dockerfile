@@ -20,21 +20,21 @@ RUN apt-get update \
 	&& apt-get install -y \
         # Install apache
         apache2 \
-        # Install php 7.2
-        libapache2-mod-php7.2 \
-        php7.2-cli \
-        php7.2-json \
-        php7.2-curl \
-        php7.2-fpm \
-        php7.2-gd \
-        php7.2-ldap \
-        php7.2-mbstring \
-        php7.2-mysql \
-        php7.2-soap \
-        php7.2-sqlite3 \
-        php7.2-xml \
-        php7.2-zip \
-        php7.2-intl \
+        # Install php 7.4
+        libapache2-mod-php7.4 \
+        php7.4-cli \
+        php7.4-json \
+        php7.4-curl \
+        php7.4-fpm \
+        php7.4-gd \
+        php7.4-ldap \
+        php7.4-mbstring \
+        php7.4-mysql \
+        php7.4-soap \
+        php7.4-sqlite3 \
+        php7.4-xml \
+        php7.4-zip \
+        php7.4-intl \
         php-imagick \
         php-oauth \
         # Install tools
@@ -130,7 +130,7 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
 
 # Configuring system
 # Additional start
-ENV PHP_MEMORY_LIMIT 2G
+ENV PHP_MEMORY_LIMIT 4G
 # Additional End
 
 ADD .docker/config/php.ini /usr/local/etc/php/php.ini
