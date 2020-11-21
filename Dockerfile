@@ -18,10 +18,9 @@ RUN apt-get update \
 	software-properties-common \
 	&& apt-get update \
 	&& apt-get install -y \
-        # Install apache
-        apache2 \
         # Install php 7.4
-        libapache2-mod-php7.4 \
+	php7.4-common\
+	php7.4-xmlrpc\
         php7.4-cli \
         php7.4-json \
         php7.4-curl \
@@ -35,6 +34,7 @@ RUN apt-get update \
         php7.4-xml \
         php7.4-zip \
         php7.4-intl \
+	php7.1-mcrypt\
         php-imagick \
         php-oauth \
         # Install tools
@@ -76,6 +76,13 @@ RUN apt-get update \
        bash-completion \
        && apt-get clean  && rm -rf /var/lib/apt/lists/*
 
+
+# Install nginx
+RUN apt update
+RUN apt install nginx
+RUN systemctl stop nginx.service
+RUN systemctl start nginx.service
+RUN systemctl enable nginx.service
 
 # Install oAuth
 
@@ -148,9 +155,8 @@ RUN echo "source /etc/bash_completion" >> /var/www/.bashrc
 RUN chmod 777 -Rf /var/www /var/www/.* \
 	&& chown -Rf www-data:www-data /var/www /var/www/.* \
 	&& usermod -u 1000 www-data \
-	&& chsh -s /bin/bash www-data\
-	&& a2enmod rewrite \
-	&& a2enmod headers
+	&& chsh -s /bin/bash www-data
+	
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
