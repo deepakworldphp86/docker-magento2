@@ -11,6 +11,16 @@ MAINTAINER Deepak Kumar <deepakworldphp86@gmail.com>
 
 ENV XDEBUG_PORT 9000
 
+# install and configure nginx
+RUN apt-get install -y nginx
+RUN systemctl stop nginx.service
+RUN systemctl start nginx.service
+RUN systemctl enable nginx.service
+
+# install MySQL
+RUN apt-get install -y mysql-client mysql-server
+
+
 # Install System Dependencies
 
 RUN apt-get update \
@@ -77,22 +87,6 @@ RUN apt-get update \
        && apt-get clean  && rm -rf /var/lib/apt/lists/*
 
 
-# Install nginx
-RUN apt update
-RUN apt install nginx
-RUN systemctl stop nginx.service
-RUN systemctl start nginx.service
-RUN systemctl enable nginx.service
-
-# Install oAuth
-
-#RUN apt-get update \
-#  	&& apt-get install -y \
-#  	libpcre3 \
-#  	libpcre3-dev \
-#  	# php-pear \
-#  	&& pecl install oauth \
-#  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
 
 # Install Node, NVM, NPM and Grunt
 
@@ -116,10 +110,6 @@ RUN ln -s ~/.composer/vendor/magento/marketplace-eqp/vendor/bin/phpcs /usr/local
 
 ENV PATH="/var/www/.composer/vendor/bin/:${PATH}"
 
-# Install XDebug
-
-#RUN yes | pecl install xdebug && \
-#	 echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.iniOLD
 
 # Install Mhsendmail
 
@@ -139,24 +129,26 @@ RUN wget https://files.magerun.net/n98-magerun2.phar \
 ENV PHP_MEMORY_LIMIT 4G
 # Additional End
 
-ADD .docker/config/php.ini /usr/local/etc/php/php.ini
-ADD .docker/config/magento.conf /etc/apache2/sites-available/magento.conf
-ADD .docker/config/custom-xdebug.ini /usr/local/etc/php/conf.d/custom-xdebug.ini
-COPY .docker/bin/* /usr/local/bin/
-COPY .docker/users/* /var/www/
-RUN chmod +x /usr/local/bin/*
-RUN ln -s /etc/apache2/sites-available/magento.conf /etc/apache2/sites-enabled/magento.conf
+# install and configure php-fpm
 
-RUN curl -o /etc/bash_completion.d/m2install-bash-completion https://raw.githubusercontent.com/yvoronoy/m2install/master/m2install-bash-completion
-RUN curl -o /etc/bash_completion.d/n98-magerun2.phar.bash https://raw.githubusercontent.com/netz98/n98-magerun2/master/res/autocompletion/bash/n98-magerun2.phar.bash
-RUN echo "source /etc/bash_completion" >> /root/.bashrc
-RUN echo "source /etc/bash_completion" >> /var/www/.bashrc
+ADD configs/nginx/nginx.conf /etc/nginx/
+ADD configs/nginx/sites-available/magento /etc/nginx/sites-available/default
+ADD configs/php/7.4/php.ini /etc/php/7.4/fpm/php.ini
+ADD configs/php/7.4/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
+ADD configs/php/7.4/pool.d/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-RUN chmod 777 -Rf /var/www /var/www/.* \
-	&& chown -Rf www-data:www-data /var/www /var/www/.* \
-	&& usermod -u 1000 www-data \
-	&& chsh -s /bin/bash www-data
-	
+ADD . /configs
+
+RUN ln -sf /configs/nginx/nginx.conf /etc/nginx/nginx.conf
+RUN ln -sf /configs/nginx/sites-available/magento /etc/nginx/sites-enabled/default
+RUN ln -sf /configs/php5/php.ini /etc/php/7.4/fpm/php.ini
+RUN ln -sf /configs/php5/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
+RUN ln -sf /configs/php5/pool.d/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+EXPOSE 80
+
+CMD bash -C '/configs/shell/start.sh';'bash'
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
+
